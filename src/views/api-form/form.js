@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { fetchPostData } from '../../utils/api-calls'
+import { convertFormInputToObject } from '../../utils/helpers'
 
 class Form extends Component {
     constructor(props) {
@@ -27,7 +29,12 @@ class Form extends Component {
 
     onFormSubmit = (event) => {
         event.preventDefault()
-        console.log('Form submitted')
+        const form = convertFormInputToObject(event.target)
+        // console.log(JSON.stringify(event.target))
+        // const { postcode, suburb, state } = event.target
+        console.log('Form submitted' + JSON.stringify(form))
+        // console.log('Here3: ' + JSON.stringify(postcode) + suburb + state)
+        fetchPostData(form.postcode, form.state)
         // this.props.handleSubmit(this.state)
     }
 
