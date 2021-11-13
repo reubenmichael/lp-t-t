@@ -1,19 +1,25 @@
-const queryPostcodeMatchesSuburb = (apiData, postcode) => {
-    // get API data 
-    // check how many objects on object
-        // if one
-            // check for match on one
-                // compare "location" to suburb
-                    // use UpperCase
-        // if many
-            // check for match on all
-    
-    // if match continue
-    // if no match, give response
-
+const queryPostcodeMatchesSuburb = (apiDataArray, inputPostcode, inputSuburb) => {
+    let match = Boolean(false)
+    while (match === Boolean(false)) {
+        let inputSuburbUC = inputSuburb.toUpperCase()
+        for (let i = 0; i <apiDataArray.length; i++) {
+            if (inputPostcode == apiDataArray[i].postcode) {
+                const apiSuburb = apiDataArray[i].suburb
+                if (JSON.stringify(apiSuburb) == JSON.stringify(inputSuburbUC)) {
+                    console.log('IT IS A MATCH!')
+                    match = Boolean(true)
+                }
+            }
+        }
+        break
+    }
+    if (match === Boolean(false)) {
+        console.log('INSERT MESSAGE HERE: THE POSTCODE X DOES NOT MATCH THE SUBURB Y')
+    }
+    return match
 }
 
-const querySuburbMatchesState = (apiData, state) => {
+const querySuburbMatchesState = (apiDataArray, state) => {
     // check how may object on object
         // loop thru
             // check for match between "location" and suburb

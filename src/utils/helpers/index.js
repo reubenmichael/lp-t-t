@@ -19,6 +19,7 @@ const simplifyAusPostData = (data) => {
     arr.push(singleLocation)
   }
   console.log(arr)
+  console.log(JSON.stringify(arr))
   return arr
 }
 
