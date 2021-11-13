@@ -4,8 +4,6 @@ const convertFormInputToObject = function (form) {
     for (const key of formData.keys()) {
       obj[key] = formData.get(key)
     }
-    // const arr = Object.values(obj)
-    // return arr
     return obj
   }
 
