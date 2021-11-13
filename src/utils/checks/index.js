@@ -1,4 +1,4 @@
-const queryPostcodeMatchesSuburb = () => {
+const queryPostcodeMatchesSuburb = (apiData, postcode) => {
     // get API data 
     // check how many objects on object
         // if one
@@ -13,7 +13,7 @@ const queryPostcodeMatchesSuburb = () => {
 
 }
 
-const querySuburbMatchesState = () => {
+const querySuburbMatchesState = (apiData, state) => {
     // check how may object on object
         // loop thru
             // check for match between "location" and suburb

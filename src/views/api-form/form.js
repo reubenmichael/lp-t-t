@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { fetchPostData } from '../../utils/api-calls'
-import { convertFormInputToObject } from '../../utils/helpers'
+import { convertFormInputToObject, simplifyAusPostData } from '../../utils/helpers'
 
 class Form extends Component {
     constructor(props) {
@@ -18,6 +18,9 @@ class Form extends Component {
         event.preventDefault()
         const form = convertFormInputToObject(event.target)
         fetchPostData(form.postcode, form.state)
+            .then(data => {
+                simplifyAusPostData(data)
+            })
     }
 
     render () {
