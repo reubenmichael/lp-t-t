@@ -19,16 +19,21 @@ const queryPostcodeMatchesSuburb = (apiDataArray, inputPostcode, inputSuburb) =>
     return match
 }
 
-const querySuburbMatchesState = (apiDataArray, state) => {
-    // check how may object on object
-        // loop thru
-            // check for match between "location" and suburb
-                // on that object, check for match between "state" and state
-
-    // if suburb is found in state once, continue
-    // if suburb is NOT found in state once, give a NOT EXIST message       
+// Assumption: that we are trying to match postcode, suburb, state in one API call based on q=postcode
+// and we are NOT checking 'gotchas' e.g. RICHMOND, VIC & RICHMOND, NSW
+// i.e. ONLY if postcode matches suburb will we then check if suburb matches state
+const querySuburbMatchesState = (apiDataArray, inputState) => {
+// Therefore, if postcode has already been show to match state,
+// we only need to check the state on the first object in the apiDataArray.
+// We can also assume that apiDataArray.length !== 0.
+let match = Boolean(false)
+if (JSON.stringify(apiDataArray[0].state) == JSON.stringify(inputState)) {
+    console.log('IT IS A MATCH! 2')
+    match = Boolean(true)
+} else {
+    console.log('THE SUBURB X DOES NOT EXIST IN THE STATE Y')
 }
-
-// if both checks are okay, give a ALL VALID response
+return match
+}
 
 export { queryPostcodeMatchesSuburb, querySuburbMatchesState }

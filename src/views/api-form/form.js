@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { fetchPostData } from '../../utils/api-calls'
 import { convertFormInputToObject, simplifyAusPostData } from '../../utils/helpers'
-import { queryPostcodeMatchesSuburb } from '../../utils/checks'
+import { queryPostcodeMatchesSuburb, querySuburbMatchesState } from '../../utils/checks'
 
 class Form extends Component {
     constructor(props) {
@@ -18,10 +18,11 @@ class Form extends Component {
     onFormSubmit = (event) => {
         event.preventDefault()
         const form = convertFormInputToObject(event.target)
-        fetchPostData(form.postcode, form.state)
+        fetchPostData(form.postcode)
             .then(data => simplifyAusPostData(data))
             .then(apiDataArray => {
                 queryPostcodeMatchesSuburb(apiDataArray, form.postcode, form.suburb)
+                querySuburbMatchesState(apiDataArray, form.state)
             })
             .catch(error => console.log(error))
     }

@@ -9,14 +9,16 @@ const convertFormInputToObject = function (form) {
 
 const simplifyAusPostData = (data) => {
   let arr = []
-  const locationsArray = data["localities"]["locality"]
-  for (let i = 0; i < locationsArray.length; i++) {
-    const singleLocation = {
-      postcode: locationsArray[i].postcode,
-      suburb: locationsArray[i].location,
-      state: locationsArray[i].state
+  if (data["localities"]["locality"] !== undefined) {
+    const locationsArray = data["localities"]["locality"]
+    for (let i = 0; i < locationsArray.length; i++) {
+      const singleLocation = {
+        postcode: locationsArray[i].postcode,
+        suburb: locationsArray[i].location,
+        state: locationsArray[i].state
+      }
+      arr.push(singleLocation)
     }
-    arr.push(singleLocation)
   }
   console.log(arr)
   console.log(JSON.stringify(arr))

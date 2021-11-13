@@ -1,5 +1,7 @@
-async function fetchPostData(q, state) {
-    const response = await fetch(`/postcode/search?q=${q}&state=${state}`, {
+async function fetchPostData(q) {
+    // Querying only via postcode (without &state=${state})
+    // as postcodes only exist in one state
+    const response = await fetch(`/postcode/search?q=${q}`, {
       method: 'GET',
       headers: {
         // NB: usually an auth key should be kept separate to the code,
