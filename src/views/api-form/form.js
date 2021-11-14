@@ -18,6 +18,7 @@ class Form extends Component {
 
     onFormSubmit = (event) => {
         event.preventDefault()
+        toast.info(`Working on it!`)
         const form = convertFormInputToObject(event.target)
         fetchPostData(form.postcode)
             .then(data => simplifyAusPostData(data))
@@ -25,10 +26,10 @@ class Form extends Component {
                 queryPostcodeMatchesSuburb(apiDataArray, form.postcode, form.suburb)
                     ? querySuburbMatchesState(apiDataArray, form.state)
                         ? toast.success(`The postcode, suburb, and state entered are valid.`)
-                        : toast.error(`The suburb ${form.suburb} does not exist in the state of ${form.state}.`)
-                    : toast.error(`The postcode ${form.postcode} does not match the suburb "${form.suburb}".`)
+                        : toast.warning(`The suburb ${form.suburb} does not exist in the state of ${form.state}.`)
+                    : toast.warning(`The postcode ${form.postcode} does not match the suburb "${form.suburb}".`)
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(`Something went wrong: ${error}`))
     }
 
     render () {
