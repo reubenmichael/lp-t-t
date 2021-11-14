@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <Fragment>
         <ApiForm />
-        <ToastContainer />
+        <ToastContainer position="bottom-center" />
       </Fragment>
     );
   }
