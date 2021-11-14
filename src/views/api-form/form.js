@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { fetchPostData } from '../../utils/api-calls'
 import { convertFormInputToObject, simplifyAusPostData } from '../../utils/helpers'
 import { queryPostcodeMatchesSuburb, querySuburbMatchesState } from '../../utils/checks'
+import { toast } from 'react-toastify'
 
 class Form extends Component {
     constructor(props) {
@@ -22,7 +23,10 @@ class Form extends Component {
             .then(data => simplifyAusPostData(data))
             .then(apiDataArray => {
                 queryPostcodeMatchesSuburb(apiDataArray, form.postcode, form.suburb)
-                querySuburbMatchesState(apiDataArray, form.state)
+                    ? querySuburbMatchesState(apiDataArray, form.state)
+                        ? toast.success(`The postcode, suburb, and state entered are valid.`)
+                        : toast.error(`The suburb ${form.suburb} does not exist in the state of ${form.state}.`)
+                    : toast.error(`The postcode ${form.postcode} does not match the suburb "${form.suburb}".`)
             })
             .catch(error => console.log(error))
     }
