@@ -9,8 +9,7 @@ const queryPostcodeMatchesSuburb = (apiDataArray, inputPostcode, inputSuburb) =>
                 const apiSuburb = apiDataArray[i].suburb
                 if (JSON.stringify(apiSuburb) == JSON.stringify(inputSuburbUC)) {
                     console.log('IT IS A MATCH!')
-                    const notify = () => toast("Wow so easy!");
-                    notify()
+                    toast.success('It\'s a match!')
                     match = Boolean(true)
                 }
             }
